@@ -23,7 +23,7 @@ def main():
     connection = wait_for_database()
 
     with connection.cursor() as cursor:
-        cursor.execute("SELECT patient_id, first_name, last_name, birth_date FROM patients;")
+        cursor.execute("SELECT patient_id, first_name, last_name, age FROM patients;")
         patients = cursor.fetchall()
 
         print("[python-app] Patients found:")
