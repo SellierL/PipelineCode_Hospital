@@ -1,3 +1,28 @@
-__pycache__
-*.pyc
-*.pyo
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Environment variables
+.env
+
+# Airflow
+logs/
+plugins/__pycache__/
+dags/__pycache__/
+
+# Docker / local volumes
+postgres_data/
+minio_data/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Temporary files
+*.log
+*.tmp
