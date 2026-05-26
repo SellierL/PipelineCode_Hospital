@@ -1,0 +1,6 @@
+﻿ Nom , Prénom ,Âge patient,Diagnostic / pathologie,Service demandé
+   Lambert,Marc,101,chute + fracture col femur,orthopédie
+Test,Patient,999,ligne de test à exclure,test
+Mercier,Sarah,38,,dermatologie
+Philippe,Tom,6 mois,bronchiolite,pédiatrie
+Aubry,Claire,52,AVC suspecté,neuro

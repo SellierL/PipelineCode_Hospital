@@ -96,6 +96,8 @@ services:
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${AIRFLOW_USER}:${AIRFLOW_PASSWORD}@postgres:5432/${AIRFLOW_DB}
       _AIRFLOW_WWW_USER_USERNAME: airflow
       _AIRFLOW_WWW_USER_PASSWORD: airflow
+      AIRFLOW__CORE__SIMPLE_AUTH_MANAGER_ALL_ADMINS: "true"
+      AIRFLOW__CORE__SIMPLE_AUTH_MANAGER_USERS: "airflow:admin"
     user: "${AIRFLOW_UID}:0"
     volumes:
       - ./dags:/opt/airflow/dags
@@ -105,14 +107,7 @@ services:
       - ./data:/opt/airflow/data
     command: >
       bash -c "
-      airflow db migrate &&
-      airflow users create
-        --username airflow
-        --password airflow
-        --firstname Airflow
-        --lastname Admin
-        --role Admin
-        --email airflow@example.com || true
+      airflow db migrate
       "
     networks:
       - hospital_network
@@ -131,6 +126,8 @@ services:
       AIRFLOW__CORE__EXECUTOR: LocalExecutor
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${AIRFLOW_USER}:${AIRFLOW_PASSWORD}@postgres:5432/${AIRFLOW_DB}
       AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__CORE__SIMPLE_AUTH_MANAGER_ALL_ADMINS: "true"
+      AIRFLOW__CORE__SIMPLE_AUTH_MANAGER_USERS: "airflow:admin"
     user: "${AIRFLOW_UID}:0"
     volumes:
       - ./dags:/opt/airflow/dags
@@ -158,6 +155,8 @@ services:
       AIRFLOW__CORE__EXECUTOR: LocalExecutor
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${AIRFLOW_USER}:${AIRFLOW_PASSWORD}@postgres:5432/${AIRFLOW_DB}
       AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__CORE__SIMPLE_AUTH_MANAGER_ALL_ADMINS: "true"
+      AIRFLOW__CORE__SIMPLE_AUTH_MANAGER_USERS: "airflow:admin"
     user: "${AIRFLOW_UID}:0"
     volumes:
       - ./dags:/opt/airflow/dags
@@ -183,6 +182,8 @@ services:
       AIRFLOW__CORE__EXECUTOR: LocalExecutor
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${AIRFLOW_USER}:${AIRFLOW_PASSWORD}@postgres:5432/${AIRFLOW_DB}
       AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__CORE__SIMPLE_AUTH_MANAGER_ALL_ADMINS: "true"
+      AIRFLOW__CORE__SIMPLE_AUTH_MANAGER_USERS: "airflow:admin"
     user: "${AIRFLOW_UID}:0"
     volumes:
       - ./dags:/opt/airflow/dags
