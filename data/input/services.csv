@@ -1,0 +1,6 @@
+service_id,service_name,floor,building
+1,Cardiologie,2,Bâtiment A
+2,Radiologie,1,Bâtiment B
+3,Urgences,0,Bâtiment C
+4,Pédiatrie,3,Bâtiment A
+5,Neurologie,4,Bâtiment B

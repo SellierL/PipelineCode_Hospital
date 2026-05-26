@@ -1,0 +1,6 @@
+patient_id,first_name,last_name,birth_date,gender,service_id
+1,Alice,Martin,1988-04-12,F,1
+2,Lucas,Bernard,1975-09-03,M,3
+3,Emma,Petit,1992-11-20,F,2
+4,Hugo,Durand,2001-06-15,M,4
+5,Lina,Moreau,1967-02-28,F,5
