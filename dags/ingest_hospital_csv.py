@@ -279,7 +279,7 @@ def standardize_dataframe(dataframe: pd.DataFrame, source_file: str) -> pd.DataF
     df["last_name"] = df["last_name"].apply(normalize_name)
     df["age"] = df["age"].apply(normalize_age)
     df["pathology"] = df["pathology"].apply(normalize_optional_text)
-    df["phone"] = df["phone"].apply(normalize_optional_text)
+    df["phone"] = df["phone"].apply(normalize_phone)
     df["comment"] = df["comment"].apply(normalize_optional_text)
     df["source_file"] = source_file
 
@@ -448,6 +448,40 @@ def insert_patient(
         values,
     )
 
+def normalize_phone(value: Any) -> str | None:
+    value = normalize_text(value)
+
+    if value is None:
+        return None
+
+    # Keep only digits and possible leading +
+    value = value.strip()
+
+    # Remove common separators
+    value = value.replace(" ", "")
+    value = value.replace("-", "")
+    value = value.replace(".", "")
+    value = value.replace("(", "")
+    value = value.replace(")", "")
+
+    # French local format: 0611223344 -> +33611223344
+    if re.fullmatch(r"0[1-9]\d{8}", value):
+        return "+33" + value[1:]
+
+    # French format without leading 0: 611223344 -> +33611223344
+    if re.fullmatch(r"[1-9]\d{8}", value):
+        return "+33" + value
+
+    # Already international with +33
+    if re.fullmatch(r"\+33[1-9]\d{8}", value):
+        return value
+
+    # International French format written as 0033...
+    if re.fullmatch(r"0033[1-9]\d{8}", value):
+        return "+" + value[2:]
+
+    # If the format is unknown, keep None rather than storing dirty data.
+    return None
 
 # =========================
 # DAG Airflow
